@@ -1,0 +1,17 @@
+version: "3"
+services: 
+  web:
+    image: openresty/openresty:alpine
+    ports:
+    - "8090:80"
+    volumes: 
+    - "./flamegraph:/opt/mywebs"
+    - "./nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+  app:
+    build: ./
+    cap_add: 
+    - ALL
+    ports:
+    - "8080:8080"
+    volumes: 
+    - "./flamegraph:/usr/local/tomcat/arthas-output"
